@@ -6,7 +6,7 @@ async function loadServers() {
     const data = await response.json();
     const serverList = document.getElementById('serverList');
 
-
+    // Iterate through each server id
     for (const serverId of data.servers) {
         const serverDetails = await fetch(`/server/${serverId}`).then(r => r.json());
         const serverIcon = document.createElement('div');
@@ -16,11 +16,13 @@ async function loadServers() {
         serverList.appendChild(serverIcon);
     }
 
+    // If there are any servers, load the channels for the first one
     if (data.servers.length > 0) {
         loadChannels(data.servers[0]);
     }
 }
 
+// Function to load and display channels for a selected server
 async function loadChannels(serverId) {
     currentServer = serverId;
     const serverDetails = await fetch(`/server/${serverId}`).then(r => r.json());
@@ -31,6 +33,7 @@ async function loadChannels(serverId) {
     const channelList = document.getElementById('channelList');
     channelList.innerHTML = '';
 
+    // Iterate through each channel id
     for (const channelId of channelData.channels) {
         const channelDetails = await fetch(`/server/${serverId}/channel/${channelId}`).then(r => r.json());
         const channelItem = document.createElement('div');
@@ -40,11 +43,13 @@ async function loadChannels(serverId) {
         channelList.appendChild(channelItem);
     }
 
+    // If there are any channels - load messages for the first one
     if (channelData.channels.length > 0) {
         loadMessages(serverId, channelData.channels[0]);
     }
 }
 
+// Function to load and display messages for a selected channel
 async function loadMessages(serverId, channelId) {
     currentChannel = channelId;
     const channelDetails = await fetch(`/server/${serverId}/channel/${channelId}`).then(r => r.json());
@@ -55,6 +60,7 @@ async function loadMessages(serverId, channelId) {
     const messageList = document.getElementById('messageList');
     messageList.innerHTML = '';
 
+    // Iterate through each message id
     for (const messageId of messageData.messages) {
         const messageDetails = await fetch(`/server/${serverId}/channel/${channelId}/message/${messageId}`).then(r => r.json());
         const userDetails = await fetch(`/user/${messageDetails.userId}`).then(r => r.json());
