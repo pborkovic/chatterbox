@@ -69,5 +69,4 @@ async function loadMessages(serverId, channelId) {
     }
 }
 
-// Initialize the application
 window.onload = loadServers;
