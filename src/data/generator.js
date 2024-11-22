@@ -81,15 +81,20 @@ function generateData() {
         "Porsche sagt Termin ist um 4:20... nice",
     ];
 
+    // Iterate through every channel id in the channels object
     Object.keys(channels).forEach(channelId => {
         const messageIds = [];
+
         for (let i = 0; i < 3; i++) {
+            // Create a unique message id using the  msgId counter
             const currentMsgId = `msg${msgId}`;
             messageIds.push(currentMsgId);
 
+            // Generate a random user id between user1 and user5
             const userId = `user${Math.floor(Math.random() * 5) + 1}`;
             const randomContent = messageContents[Math.floor(Math.random() * messageContents.length)];
 
+            // Create a new message object and store it in the messages object
             messages[currentMsgId] = {
                 date: new Date(Date.now() - Math.random() * 1000000).toISOString(),
                 userId: userId,
