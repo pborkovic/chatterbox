@@ -3,7 +3,9 @@ const path = require('path');
 const { generateData } = require('./data/generator');
 const app = express();
 const port = 3456;
+const cors =  require('cors');
 
+app.use(cors());
 app.use(express.static('public'));
 
 const { users, servers, channels, messages } = generateData();
