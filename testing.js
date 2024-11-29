@@ -63,7 +63,7 @@ async function runTests() {
     }, 'Create new message');
 }
 
-console.log('🧪 Starting API tests...');
+console.log('Starting API tests...');
 runTests()
-    .then(() => console.log('\n✅ API testing completed!'))
-    .catch(error => console.error('\n❌ Testing failed:', error));
+    .then(() => console.log('\n API testing completed!'))
+    .catch(error => console.error('\n Testing failed:', error));
