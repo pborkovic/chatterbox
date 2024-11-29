@@ -17,12 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Setup routes
 app.use('/user', setupUserRoutes(db, dbOps));
 app.use('/server', setupServerRoutes(db, dbOps));
 app.use('/server', setupChannelRoutes(db, dbOps));
 app.use('/server', setupMessageRoutes(db, dbOps));
 
+// Error middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
