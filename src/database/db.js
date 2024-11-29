@@ -76,7 +76,6 @@ function createMessages(db) {
     stmt.run();
 }
 
-// Database operations for users
 function insertUser(db, user) {
     const sql = `
     INSERT INTO users (login, firstName, lastName, email, password)
@@ -98,7 +97,6 @@ function getUserById(db, id) {
     return stmt.get(id);
 }
 
-// Database operations for servers
 function insertServer(db, server) {
     const sql = `
     INSERT INTO servers (name, description, admin_user_id)
@@ -120,7 +118,6 @@ function getServerById(db, id) {
     return stmt.get(id);
 }
 
-// Database operations for channels
 function insertChannel(db, channel) {
     const sql = `
     INSERT INTO channels (name, description, moderator_user_id, server_id)
@@ -142,7 +139,6 @@ function getChannelById(db, id) {
     return stmt.get(id);
 }
 
-// Database operations for messages
 function insertMessage(db, message) {
     const sql = `
     INSERT INTO messages (timestamp, user_id, channel_id, message)
@@ -169,7 +165,6 @@ function getMessageById(db, id) {
     return stmt.get(id);
 }
 
-// Initialize database
 function initializeDatabase() {
     const db = new Database('chatterbox.db');
     const tables = getAllTables(db);
