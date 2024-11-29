@@ -103,15 +103,14 @@ const memeMessages = [
 ];
 
 function seedDatabase() {
-    console.log('🌱 Starting database seeding...');
+    console.log('Starting database seeding');
 
-    // Insert users
     const insertUser = db.prepare(`
         INSERT INTO users (login, firstName, lastName, email, password)
         VALUES (:login, :firstName, :lastName, :email, :password)
     `);
 
-    console.log('👤 Seeding users...');
+    console.log('Seeding users');
     for (const user of memeUsers) {
         try {
             insertUser.run(user);
@@ -120,13 +119,12 @@ function seedDatabase() {
         }
     }
 
-    // Insert servers
     const insertServer = db.prepare(`
         INSERT INTO servers (name, description, admin_user_id)
         VALUES (:name, :description, :admin_user_id)
     `);
 
-    console.log('🖥️ Seeding servers...');
+    console.log('Seeding servers');
     for (const server of memeServers) {
         try {
             insertServer.run(server);
@@ -135,7 +133,6 @@ function seedDatabase() {
         }
     }
 
-    // Insert channels
     const insertChannel = db.prepare(`
         INSERT INTO channels (name, description, moderator_user_id, server_id)
         VALUES (:name, :description, :moderator_user_id, :server_id)
@@ -150,16 +147,15 @@ function seedDatabase() {
         }
     }
 
-    // Insert messages
     const insertMessage = db.prepare(`
         INSERT INTO messages (timestamp, user_id, channel_id, message)
         VALUES (:timestamp, :user_id, :channel_id, :message)
     `);
 
-    console.log('💬 Seeding messages...');
+    console.log('Seeding messages');
     for (let i = 0; i < 50; i++) {
         const message = {
-            timestamp: Date.now() / 1000 - Math.floor(Math.random() * 86400), // Random time in last 24 hours
+            timestamp: Date.now() / 1000 - Math.floor(Math.random() * 86400), // 86bs -> 24 hours
             user_id: Math.floor(Math.random() * memeUsers.length) + 1,
             channel_id: Math.floor(Math.random() * memeChannels.length) + 1,
             message: memeMessages[Math.floor(Math.random() * memeMessages.length)]
@@ -172,7 +168,7 @@ function seedDatabase() {
         }
     }
 
-    console.log('✅ Seeding completed!');
+    console.log('Seeding completed!');
 }
 
 // Run the seeder
