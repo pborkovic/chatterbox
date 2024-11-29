@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const BASE_URL = 'http://localhost:3456';
 
@@ -65,5 +65,5 @@ async function runTests() {
 
 console.log('Starting API tests...');
 runTests()
-    .then(() => console.log('\n API testing completed!'))
+    .then(() => console.log('\n  API testing completed!'))
     .catch(error => console.error('\n Testing failed:', error));
