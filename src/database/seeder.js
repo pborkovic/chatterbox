@@ -138,7 +138,7 @@ function seedDatabase() {
         VALUES (:name, :description, :moderator_user_id, :server_id)
     `);
 
-    console.log('📝 Seeding channels...');
+    console.log('Seeding channels...');
     for (const channel of memeChannels) {
         try {
             insertChannel.run(channel);
