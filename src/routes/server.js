@@ -4,7 +4,6 @@ const cors = require('cors');
 const db = require('./src/database/db').initializeDatabase();
 const dbOps = require('./src/database/db');
 
-// Import routes
 const setupUserRoutes = require('./src/routes/users');
 const setupServerRoutes = require('./src/routes/servers');
 const setupChannelRoutes = require('./src/routes/channels');
@@ -24,7 +23,6 @@ app.use('/server', setupServerRoutes(db, dbOps));
 app.use('/server', setupChannelRoutes(db, dbOps));
 app.use('/server', setupMessageRoutes(db, dbOps));
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
