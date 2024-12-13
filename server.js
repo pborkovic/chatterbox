@@ -1,35 +1,40 @@
 const express = require('express');
-const path = require('path');
-
 const cors = require('cors');
 
-const db = require('./src/database/db').initializeDatabase();
-const dbOps = require('./src/database/db');
+const db = require('./src/database/db');
+const dbInstance = db.initializeDatabase();
 
-const setupUserRoutes = require('./src/routes/users');
-const setupServerRoutes = require('./src/routes/servers');
-const setupChannelRoutes = require('./src/routes/channels');
-const setupMessageRoutes = require('./src/routes/messages');
+const UserController = require('./src/controllers/UserController');
+const ServerController = require('./src/controllers/ServerController');
+const ChannelController = require('./src/controllers/ChannelController');
+const MessageController = require('./src/controllers/MessageController');
+
+const setupUserRoutes = require('./src/routes/userRoutes');
+const setupServerRoutes = require('./src/routes/serverRoutes');
+const setupChannelRoutes = require('./src/routes/channelRoutes');
+const setupMessageRoutes = require('./src/routes/messageRoutes');
 
 const app = express();
 const port = 3456;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
 
-app.use('/user', setupUserRoutes(db, dbOps));
-app.use('/server', setupServerRoutes(db, dbOps));
-app.use('/server', setupChannelRoutes(db, dbOps));
-app.use('/server', setupMessageRoutes(db, dbOps));
+const userController = new UserController(dbInstance, db);
+const serverController = new ServerController(dbInstance, db);
+const channelController = new ChannelController(dbInstance, db);
+const messageController = new MessageController(dbInstance, db);
 
-// Error middleware
+app.use('/api/users', setupUserRoutes(userController));
+app.use('/api/servers', setupServerRoutes(serverController));
+app.use('/api/servers/:serverId/channels', setupChannelRoutes(channelController));
+app.use('/api/channels/:channelId/messages', setupMessageRoutes(messageController));
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ error: 'Something broke!' });
+    res.status(500).json({ error: 'Something went wrong!' });
 });
 
 app.listen(port, () => {
-    console.log(`Chatterbox server running at http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
