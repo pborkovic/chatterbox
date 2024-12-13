@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    background: #1a1a1a;
+    color: #dcddde;
+}
+
+/* Servers List */
+.servers-list {
+    width: 72px;
+    background: #202225;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.server {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #36393f;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.server img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.server.active, .server:hover {
+    border-radius: 16px;
+    background: #5865f2;
+}
+
+.add-server {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #36393f;
+    color: #3ba55d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.add-server:hover {
+    border-radius: 16px;
+    background: #3ba55d;
+    color: white;
+}
+
+/* Channels Sidebar */
+.channels-sidebar {
+    width: 240px;
+    background: #2f3136;
+    display: flex;
+    flex-direction: column;
+}
+
+.server-header {
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #202225;
+}
+
+.server-header h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.server-header i {
+    cursor: pointer;
+    color: #b9bbbe;
+}
+
+.channels {
+    padding: 16px;
+}
+
+.channels h3 {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #8e9297;
+    margin-bottom: 8px;
+}
+
+.channel {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #8e9297;
+    margin-bottom: 2px;
+}
+
+.channel:hover {
+    background: #36393f;
+    color: #dcddde;
+}
+
+.channel.active {
+    background: #393c43;
+    color: #fff;
+}
+
+.channel i {
+    margin-right: 6px;
+    font-size: 20px;
+}
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    background: #36393f;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #202225;
+}
+
+.channel-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+}
+
+.message .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #5865f2;
+    overflow: hidden;
+}
+
+.message .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message .content {
+    flex: 1;
+}
+
+.message .header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.message .username {
+    font-weight: 500;
+}
+
+.message .timestamp {
+    font-size: 0.75rem;
+    color: #72767d;
+}
+
+.message-input {
+    height: 68px;
+    padding: 0 16px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.message-input input {
+    flex: 1;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 8px;
+    background: #40444b;
+    border: none;
+    color: #dcddde;
+    font-size: 1rem;
+}
+
+.message-input input:focus {
+    outline: none;
+}
+
+.message-input button {
+    background: none;
+    border: none;
+    color: #dcddde;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.message-input button:hover {
+    color: #fff;
+}

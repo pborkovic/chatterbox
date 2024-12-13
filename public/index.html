@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatterbox</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+  <!-- Server List -->
+  <div class="servers-list">
+    <div class="server active">
+      <img src="/api/placeholder/48/48" alt="General Server">
+    </div>
+    <div class="server">
+      <img src="/api/placeholder/48/48" alt="Gaming Server">
+    </div>
+    <div class="add-server">
+      <i class="fas fa-plus"></i>
+    </div>
+  </div>
+
+  <!-- Channels List -->
+  <div class="channels-sidebar">
+    <div class="server-header">
+      <h2>General Server</h2>
+      <i class="fas fa-cog"></i>
+    </div>
+    <div class="channels">
+      <h3>Text Channels</h3>
+      <div class="channel active">
+        <i class="fas fa-hashtag"></i>
+        <span>general</span>
+      </div>
+      <div class="channel">
+        <i class="fas fa-hashtag"></i>
+        <span>introductions</span>
+      </div>
+      <div class="channel">
+        <i class="fas fa-hashtag"></i>
+        <span>off-topic</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Chat Area -->
+  <div class="chat-area">
+    <div class="chat-header">
+      <div class="channel-info">
+        <i class="fas fa-hashtag"></i>
+        <span>general</span>
+      </div>
+    </div>
+
+    <div class="messages" id="messages">
+      <!-- Messages will be dynamically added here -->
+    </div>
+
+    <div class="message-input">
+      <input type="text" placeholder="Send a message..." id="messageInput">
+      <button id="sendButton">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
