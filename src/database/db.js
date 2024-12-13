@@ -76,6 +76,18 @@ function createMessages(db) {
     stmt.run();
 }
 
+function initializeDatabase() {
+    const db = new Database('chatterbox.db');
+    const tables = getAllTables(db);
+
+    if (!hasTable('users', tables)) createUsers(db);
+    if (!hasTable('servers', tables)) createServers(db);
+    if (!hasTable('channels', tables)) createChannels(db);
+    if (!hasTable('messages', tables)) createMessages(db);
+
+    return db;
+}
+
 function insertUser(db, user) {
     const sql = `
     INSERT INTO users (login, firstName, lastName, email, password)
@@ -163,18 +175,6 @@ function getMessageById(db, id) {
     const sql = `SELECT * FROM messages WHERE id = ?`;
     const stmt = db.prepare(sql);
     return stmt.get(id);
-}
-
-function initializeDatabase() {
-    const db = new Database('chatterbox.db');
-    const tables = getAllTables(db);
-
-    if (!hasTable('users', tables)) createUsers(db);
-    if (!hasTable('servers', tables)) createServers(db);
-    if (!hasTable('channels', tables)) createChannels(db);
-    if (!hasTable('messages', tables)) createMessages(db);
-
-    return db;
 }
 
 module.exports = {
