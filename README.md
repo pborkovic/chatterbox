@@ -14,15 +14,15 @@ A simple chat application built with Node.js, Express, and SQLite, featuring a D
 ## 🛠️ Technology Stack
 
 - **Backend:**
-    - Node.js
-    - Express.js
-    - SQLite (better-sqlite3)
-    - REST API
+  - Node.js
+  - Express.js
+  - SQLite (better-sqlite3)
+  - REST API
 
 - **Frontend:**
-    - Vanilla JavaScript
-    - HTML5
-    - CSS3
+  - Vanilla JavaScript
+  - HTML5
+  - CSS3
 
 ## 📋 Prerequisites
 
@@ -58,58 +58,100 @@ The application will be available at `http://localhost:3456`
 
 ```
 chatterbox/
-├── node_modules/
-├── public/
-│   ├── index.html
-│   ├── app.js
-│   └── styles/
-│       └── main.css
 ├── src/
+│   ├── controllers/
+│   │   ├── ChannelController.js
+│   │   ├── MessageController.js
+│   │   ├── ServerController.js
+│   │   └── UserController.js
 │   ├── database/
 │   │   ├── db.js
-│   │   └── seeder.js
-│   ├── routes/
-│   │   ├── users.js
-│   │   ├── servers.js
-│   │   ├── channels.js
-│   │   └── messages.js
-│   └── utils/
-│       └── validation.js
+│   │   └── seeders.js
+│   ├── middleware/
+│   │   ├── pagination.js
+│   │   └── validators.js
+│   ├── models/
+│   │   ├── ChannelModel.js
+│   │   ├── MessageModel.js
+│   │   ├── ServerModel.js
+│   │   └── UserModel.js
+│   └── routes/
+│       ├── channelRoutes.js
+│       ├── messageRoutes.js
+│       ├── serverRoutes.js
+│       └── userRoutes.js
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   └── index.js
 ├── package.json
-└── server.js
+├── server.js
+└── README.md
 ```
 
 ## 🔌 API Endpoints
 
 ### Users
-- `GET /user` - Get all users
-- `POST /user` - Create new user
-- `GET /user/:userId` - Get specific user
+- `GET /api/users` - Get all users
+- `GET /api/users/:userId` - Get user by ID
+- `POST /api/users` - Create new user
 
 ### Servers
-- `GET /server` - Get all servers
-- `POST /server` - Create new server
-- `GET /server/:serverId` - Get specific server
+- `GET /api/servers` - Get all servers
+- `GET /api/servers/:serverId` - Get server by ID
+- `POST /api/servers` - Create new server
 
 ### Channels
-- `GET /server/:serverId/channel` - Get all channels in server
-- `POST /server/:serverId/channel` - Create new channel
-- `GET /server/:serverId/channel/:channelId` - Get specific channel
+- `GET /api/servers/:serverId/channels` - Get all channels in server
+- `GET /api/servers/:serverId/channels/:channelId` - Get channel by ID
+- `POST /api/servers/:serverId/channels` - Create new channel
 
 ### Messages
-- `GET /server/:serverId/channel/:channelId/message` - Get messages in channel
-- `POST /server/:serverId/channel/:channelId/message` - Create new message
+- `GET /api/channels/:channelId/messages` - Get messages in channel
+- `GET /api/channels/:channelId/messages/:messageId` - Get message by ID
+- `POST /api/channels/:channelId/messages` - Create new message
 
+## 💾 Database Schema
+
+```sql
+users
+- id (INTEGER PRIMARY KEY)
+- login (VARCHAR)
+- firstName (VARCHAR)
+- lastName (VARCHAR)
+- email (VARCHAR)
+- password (VARCHAR)
+
+servers
+- id (INTEGER PRIMARY KEY)
+- name (VARCHAR)
+- description (TEXT)
+- admin_user_id (INTEGER FK)
+
+channels
+- id (INTEGER PRIMARY KEY)
+- name (VARCHAR)
+- description (TEXT)
+- server_id (INTEGER FK)
+- moderator_user_id (INTEGER FK)
+
+messages
+- id (INTEGER PRIMARY KEY)
+- timestamp (REAL)
+- user_id (INTEGER FK)
+- channel_id (INTEGER FK)
+- message (TEXT)
+```
 
 ## 🧪 Testing
 
-You can test the API endpoints using the provided testing script using the npm command:
+You can test the API endpoints using the provided testing script:
 
 ```bash
-  npm test
+npm test
 ```
 
-For more test commands, see `curls.md` in the project root.
+For manual API testing, a Postman collection is included in the repository.
 
 ## 📄 License
 
