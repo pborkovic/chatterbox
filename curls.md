@@ -4,12 +4,12 @@
 
 ### Get all users
 ```bash
-curl -X GET http://localhost:3456/user
+curl -X GET http://localhost:3456/api/users
 ```
 
 ### Create new user
 ```bash
-curl -X POST http://localhost:3456/user \
+curl -X POST http://localhost:3456/api/users \
 -H "Content-Type: application/json" \
 -d '{
     "login": "testuser123",
@@ -22,19 +22,19 @@ curl -X POST http://localhost:3456/user \
 
 ### Get specific user
 ```bash
-curl -X GET http://localhost:3456/user/1
+curl -X GET http://localhost:3456/api/users/1
 ```
 
 ## Servers
 
 ### Get all servers
 ```bash
-curl -X GET http://localhost:3456/server
+curl -X GET http://localhost:3456/api/servers
 ```
 
 ### Create new server
 ```bash
-curl -X POST http://localhost:3456/server \
+curl -X POST http://localhost:3456/api/servers \
 -H "Content-Type: application/json" \
 -d '{
     "name": "Test Server",
@@ -45,19 +45,19 @@ curl -X POST http://localhost:3456/server \
 
 ### Get specific server
 ```bash
-curl -X GET http://localhost:3456/server/1
+curl -X GET http://localhost:3456/api/servers/1
 ```
 
 ## Channels
 
 ### Get all channels in a server
 ```bash
-curl -X GET http://localhost:3456/server/1/channel
+curl -X GET http://localhost:3456/api/servers/1/channels
 ```
 
 ### Create new channel
 ```bash
-curl -X POST http://localhost:3456/server/1/channel \
+curl -X POST http://localhost:3456/api/servers/1/channels \
 -H "Content-Type: application/json" \
 -d '{
     "name": "test-channel",
@@ -68,24 +68,24 @@ curl -X POST http://localhost:3456/server/1/channel \
 
 ### Get specific channel
 ```bash
-curl -X GET http://localhost:3456/server/1/channel/1
+curl -X GET http://localhost:3456/api/servers/1/channels/1
 ```
 
 ## Messages
 
 ### Get messages in a channel
 ```bash
-curl -X GET http://localhost:3456/server/1/channel/1/message
+curl -X GET http://localhost:3456/api/channels/1/messages
 ```
 
 ### Get limited number of messages
 ```bash
-curl -X GET "http://localhost:3456/server/1/channel/1/message?count=5"
+curl -X GET "http://localhost:3456/api/channels/1/messages?count=5"
 ```
 
 ### Create new message
 ```bash
-curl -X POST http://localhost:3456/server/1/channel/1/message \
+curl -X POST http://localhost:3456/api/channels/1/messages \
 -H "Content-Type: application/json" \
 -d '{
     "user_id": 1,
@@ -99,7 +99,7 @@ Here's a typical sequence of commands to test the full functionality:
 
 1. Create a user:
 ```bash
-curl -X POST http://localhost:3456/user \
+curl -X POST http://localhost:3456/api/users \
 -H "Content-Type: application/json" \
 -d '{
     "login": "testuser",
@@ -112,7 +112,7 @@ curl -X POST http://localhost:3456/user \
 
 2. Create a server:
 ```bash
-curl -X POST http://localhost:3456/server \
+curl -X POST http://localhost:3456/api/servers \
 -H "Content-Type: application/json" \
 -d '{
     "name": "My Server",
@@ -123,7 +123,7 @@ curl -X POST http://localhost:3456/server \
 
 3. Create a channel:
 ```bash
-curl -X POST http://localhost:3456/server/1/channel \
+curl -X POST http://localhost:3456/api/servers/1/channels \
 -H "Content-Type: application/json" \
 -d '{
     "name": "general",
@@ -134,7 +134,7 @@ curl -X POST http://localhost:3456/server/1/channel \
 
 4. Send a message:
 ```bash
-curl -X POST http://localhost:3456/server/1/channel/1/message \
+curl -X POST http://localhost:3456/api/channels/1/messages \
 -H "Content-Type: application/json" \
 -d '{
     "user_id": 1,
@@ -144,5 +144,5 @@ curl -X POST http://localhost:3456/server/1/channel/1/message \
 
 5. Verify the message:
 ```bash
-curl -X GET http://localhost:3456/server/1/channel/1/message
+curl -X GET http://localhost:3456/api/channels/1/messages
 ```
